@@ -3,6 +3,7 @@ This is just for an Ansible overview.
 
 # Credential
 User: test
+
 Password: test
 
 # Steps
@@ -35,7 +36,7 @@ ansible-playbook --inventory hosts -u test --ask-pass playbooks/my_first_playboo
 # Execute playbook with template and handler
 ansible-playbook --inventory hosts -u test --ask-pass --ask-become-pass playbooks/install-nginx.yaml
 
-# Test with cur or in browser
+# Test with curl or in browser
 curl http://172.17.0.2
 curl http://172.17.0.3
 ```
