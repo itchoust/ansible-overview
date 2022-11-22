@@ -1,0 +1,7 @@
+[servers]
+server1 ansible_host=172.17.0.2 http_host=mydomain1.local http_conf=mydomain1.local.conf
+server2 ansible_host=172.17.0.3 http_host=mydomain2.local http_conf=mydomain2.local.conf
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+http_port="80"

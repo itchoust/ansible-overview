@@ -1,0 +1,39 @@
+---
+- name: Ansible Playbook to Install and Setup Nginx on Ubuntu
+  hosts: all
+  become: yes
+  vars:
+    - nginx_folder: /home/dmilazzo/Dev/tests/ansible-nginx/
+  tasks:
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+
+    - name: copy the nginx config file and restart nginx
+      copy:
+        src: "{{ nginx_folder }}static_site.cfg"
+        dest: /etc/nginx/sites-available/static_site.cfg
+      notify: restart-nginx
+
+    - name: create symlink
+      file:
+        src: /etc/nginx/sites-available/static_site.cfg
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+      notify: restart-nginx
+
+    - name: Generate and copy the index.html of the web site
+      template:
+        src: "{{ nginx_folder }}static-site-src/index.html.j2"
+        dest: /home/foo/static-site/index.html
+      notify: restart-nginx
+
+  handlers:
+    - name: restart-nginx
+      service:
+        name: nginx
+        state: restarted
