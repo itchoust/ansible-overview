@@ -13,8 +13,8 @@ Password: test
 docker build -f Dockerfile_node -t ansible-node .
 
 # Run two nodes
-docker run -d --name ansible-node1 -p 2222:22 ansible-node
-docker run -d --name ansible-node2 -p 2223:22 ansible-node
+docker run -d --rm --name ansible-node1 -p 2222:22 ansible-node
+docker run -d --rm --name ansible-node2 -p 2223:22 ansible-node
 
 # Get IP of each nodes
 docker container inspect -f '{{ .NetworkSettings.IPAddress }}' ansible-node1

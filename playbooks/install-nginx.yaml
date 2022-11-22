@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    - nginx_folder: /home/dmilazzo/Dev/tests/ansible-nginx/
+    - nginx_folder: /home/dmilazzo/Dev/tests/ansible-overview/ansible-nginx/
   tasks:
     - name: ensure nginx is at the latest version
       apt: name=nginx state=latest
@@ -29,7 +29,7 @@
     - name: Generate and copy the index.html of the web site
       template:
         src: "{{ nginx_folder }}static-site-src/index.html.j2"
-        dest: /home/foo/static-site/index.html
+        dest: /usr/share/nginx/html/index.html
       notify: restart-nginx
 
   handlers:
